@@ -20,7 +20,7 @@ while True:
 
     pressedKey = cv.waitKey(1)
     if pressedKey == -1:
-        continue
+        pass
     elif pressedKey == ord('q'):
         break
     else:
@@ -31,11 +31,11 @@ while True:
         outputs_chr = [f for f in dir if f.startswith('output_'+chr(pressedKey))]
         next_clip_num = np.max([int(f.split('_')[2].split('.')[0]) for f in outputs_chr]) + 1 if len(outputs_chr) > 0 else 0
         
-        out = cv.VideoWriter('output_'+chr(pressedKey)+'_'+str(next_clip_num)+'.avi', fourcc, 20.0, (640, 480))
+        # save the clip to video_clips folder (this will be gitignored)
+        out = cv.VideoWriter('video_clips/output_'+chr(pressedKey)+'_'+str(next_clip_num)+'.avi', fourcc, 20.0, (640, 480))
         for i in range(len(clip)):
             out.write(clip[i])
         out.release()
-
 
 vid.release()
 cv.destroyAllWindows()
